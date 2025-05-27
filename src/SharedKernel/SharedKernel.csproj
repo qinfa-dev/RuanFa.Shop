@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>RuanFa.FashionShop.SharedKernel</RootNamespace>
+    <AssemblyName>RuanFa.FashionShop.SharedKernel</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ErrorOr" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="MediatR.Contracts" />
+  </ItemGroup>
+
+</Project>
