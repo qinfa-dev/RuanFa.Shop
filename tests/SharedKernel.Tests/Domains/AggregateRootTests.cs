@@ -10,7 +10,7 @@ public class AggregateRootTests
         public TestAggregateRoot() : base() { }
         public TestAggregateRoot(int id) : base(id) { }
         public void SetCreatedBy(string createdBy) => CreatedBy = createdBy;
-        public void SetUpdatedBy(string updatedBy) => UpdatedBy = updatedBy;
+        public void SetUpdatedBy(string updatedBy) => LastModifiedBy = updatedBy;
     }
 
     private class DifferentTestAggregateRoot(int id) : AggregateRoot<int>(id)
@@ -28,9 +28,9 @@ public class AggregateRootTests
             var aggregate = new TestAggregateRoot();
             aggregate.Id.ShouldBe(0); // Default value for int
             aggregate.CreatedBy.ShouldBeNull();
-            aggregate.UpdatedBy.ShouldBeNull();
+            aggregate.LastModifiedBy.ShouldBeNull();
             aggregate.CreatedAt.ShouldBe(default);
-            aggregate.UpdatedAt.ShouldBeNull();
+            aggregate.LastModified.ShouldBeNull();
             aggregate.DomainEvents.ShouldNotBeNull();
             aggregate.DomainEvents.Count.ShouldBe(0);
         }
@@ -41,9 +41,9 @@ public class AggregateRootTests
             var aggregate = new TestAggregateRoot(42);
             aggregate.Id.ShouldBe(42);
             aggregate.CreatedBy.ShouldBeNull();
-            aggregate.UpdatedBy.ShouldBeNull();
+            aggregate.LastModifiedBy.ShouldBeNull();
             aggregate.CreatedAt.ShouldBe(default);
-            aggregate.UpdatedAt.ShouldBeNull();
+            aggregate.LastModified.ShouldBeNull();
             aggregate.DomainEvents.ShouldNotBeNull();
             aggregate.DomainEvents.Count.ShouldBe(0);
         }
@@ -66,14 +66,14 @@ public class AggregateRootTests
         {
             var aggregate = new TestAggregateRoot(1);
             aggregate.SetUpdatedBy("user2");
-            aggregate.UpdatedBy.ShouldBe("user2");
+            aggregate.LastModifiedBy.ShouldBe("user2");
         }
 
         [Fact]
         public void CreatedAt_CanBeSetAndRetrieved()
         {
             var aggregate = new TestAggregateRoot(1);
-            var date = DateTime.UtcNow;
+            var date = DateTimeOffset.UtcNow;
             aggregate.CreatedAt = date;
             aggregate.CreatedAt.ShouldBe(date);
         }
@@ -82,9 +82,9 @@ public class AggregateRootTests
         public void UpdatedAt_CanBeSetAndRetrieved()
         {
             var aggregate = new TestAggregateRoot(1);
-            var date = DateTime.UtcNow;
-            aggregate.UpdatedAt = date;
-            aggregate.UpdatedAt.ShouldBe(date);
+            var date = DateTimeOffset.UtcNow;
+            aggregate.LastModified = date;
+            aggregate.LastModified.ShouldBe(date);
         }
     }
     #endregion

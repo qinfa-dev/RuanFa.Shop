@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>RuanFa.FashionShop.Domain</RootNamespace>
+    <AssemblyName>RuanFa.FashionShop.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+  </ItemGroup>
+</Project>

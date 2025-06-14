@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>RuanFa.FashionShop.Infrastructure</RootNamespace>
+    <AssemblyName>RuanFa.FashionShop.Infrastructure</AssemblyName>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" />
+    <PackageReference Include="EFCore.BulkExtensions" />
+    <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="FluentEmail.Core" />
+    <PackageReference Include="FluentEmail.SendGrid" />
+    <PackageReference Include="FluentEmail.Smtp" />
+    <PackageReference Include="FluentStorage" />
+    <PackageReference Include="Google.Apis.Auth" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+
+</Project>
