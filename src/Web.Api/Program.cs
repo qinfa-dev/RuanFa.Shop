@@ -21,7 +21,8 @@ var app = builder.Build();
 
 app.UsePresentation();
 
-Log.Information("Application Starting");
+await app.ScheduleBackgroundJobsAsync();
 
+Log.Information("Application Starting");
 await app.RunAsync();
 

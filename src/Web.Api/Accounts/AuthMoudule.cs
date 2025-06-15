@@ -15,9 +15,9 @@ using RuanFa.FashionShop.Application.Accounts.Credentials.Password.Update;
 using RuanFa.FashionShop.Application.Accounts.Credentials.Email.Confirm;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authentication.Contexts;
 using RuanFa.FashionShop.Application.Accounts.Users.Get;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
 using ErrorOr;
 using RuanFa.FashionShop.Application.Accounts.Users.Update;
+using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 
 namespace RuanFa.FashionShop.Web.Api.Accounts;
 
