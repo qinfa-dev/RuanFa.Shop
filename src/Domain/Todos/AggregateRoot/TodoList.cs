@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using RuanFa.FashionShop.Domain.Todos.Entities;
+﻿using RuanFa.FashionShop.Domain.Todos.Entities;
 using RuanFa.FashionShop.Domain.Todos.ValueObjects;
 using RuanFa.FashionShop.SharedKernel.Domains.AggregateRoots;
 
@@ -8,12 +7,12 @@ namespace RuanFa.FashionShop.Domain.Todos.AggregateRoot;
 public class TodoList : AggregateRoot<int>
 {
     #region Properties
-    public string Title { get; private set; }
-    public Colour? Colour { get; private set; }
-    private readonly List<TodoItem> _items = new();
-    public IReadOnlyList<TodoItem> Items => new ReadOnlyCollection<TodoItem>(_items);
+    public string Title { get; set; }
+    public Colour? Colour { get; set; }
+    #endregion
 
-
+    #region Relationship
+    public ICollection<TodoItem> Items { get; set; }
     #endregion
 
     #region Constructor
@@ -21,6 +20,7 @@ public class TodoList : AggregateRoot<int>
     {
         Title = title;
         Colour = colour;
+        Items = new List<TodoItem>();
     }
     #endregion
 
@@ -28,35 +28,6 @@ public class TodoList : AggregateRoot<int>
     public static TodoList Create(string title, Colour? colour)
     {
         return new TodoList(title.Trim(), colour);
-    }
-    #endregion
-
-    #region Methods
-    public TodoList Update(string? newTitle, Colour? colour)
-    {
-        Title = newTitle ?? Title;
-        Colour = colour;
-
-        return this;
-    }
-
-    public void AddItem(TodoItem item)
-    {
-        _items.Add(item);
-    }
-
-    public void RemoveItem(int itemId)
-    {
-        var item = _items.FirstOrDefault(i => i.Id == itemId);
-        if (item != null)
-        {
-            _items.Remove(item);
-        }
-    }
-
-    public void ClearCompletedItems()
-    {
-        _items.RemoveAll(item => item.Done);
     }
     #endregion
 }

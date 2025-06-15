@@ -8,7 +8,7 @@ using RuanFa.FashionShop.SharedKernel.Domains.Entities;
 
 namespace RuanFa.FashionShop.Domain.Accounts.Entities;
 
-public class UserProfile : AuditableEnitity<Guid>
+public class UserProfile : AuditableEntity<Guid>
 {
     #region Properties
     public Guid? UserId { get; private set; }

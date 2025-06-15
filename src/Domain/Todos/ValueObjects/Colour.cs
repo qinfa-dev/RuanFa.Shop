@@ -54,7 +54,7 @@ public class Colour(string code) : ValueObject
         return Code;
     }
 
-    protected static IEnumerable<Colour> SupportedColours
+    public static IEnumerable<Colour> SupportedColours
     {
         get
         {
@@ -72,5 +72,18 @@ public class Colour(string code) : ValueObject
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Code;
+    }
+}
+public static class ColorExtentions
+{
+    public static bool IsSupportedColor(this string? code)
+    {
+        if (string.IsNullOrEmpty(code))
+        {
+            return false;
+        }
+
+        // Check if the code matches any of the supported colors' Code values
+        return Colour.SupportedColours.Any(colour => colour.Code.Equals(code, StringComparison.OrdinalIgnoreCase));
     }
 }

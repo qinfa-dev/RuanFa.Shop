@@ -2,7 +2,7 @@
 
 namespace RuanFa.FashionShop.SharedKernel.Domains.AggregateRoots;
 
-public abstract class AggregateRoot<TId> : AuditableEnitity<TId> where TId : notnull
+public abstract class AggregateRoot<TId> : AuditableEntity<TId> where TId : notnull
 {
     #region Constructors
     protected AggregateRoot() : base() { }
