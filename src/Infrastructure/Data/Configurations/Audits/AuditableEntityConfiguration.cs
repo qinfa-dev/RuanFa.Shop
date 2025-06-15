@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Domain;
 
-namespace RuanFa.FashionShop.Infrastructure.Data.Configurations.Aduits;
+namespace RuanFa.FashionShop.Infrastructure.Data.Configurations.Audits;
 
 internal sealed class AuditableEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : class, IAuditable, IHasDomainEvent

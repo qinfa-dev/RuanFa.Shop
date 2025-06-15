@@ -3,17 +3,18 @@ using Mapster;
 using MediatR;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authorization.Attributes;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authorization.Permissions;
+using RuanFa.FashionShop.Application.Accounts.Credentials.Roles.Assign;
 using RuanFa.FashionShop.Application.Accounts.Credentials.Roles.Create;
 using RuanFa.FashionShop.Application.Accounts.Credentials.Roles.Delete;
 using RuanFa.FashionShop.Application.Accounts.Credentials.Roles.Get;
 using RuanFa.FashionShop.Application.Accounts.Credentials.Roles.Update;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
+using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Web.Api.Extensions;
 
 namespace RuanFa.FashionShop.Web.Api.Accounts;
 
-public class RoleMoudle : ICarterModule
+public class RoleModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -95,6 +96,22 @@ public class RoleMoudle : ICarterModule
             .WithDescription("Deletes an existing role by their unique ID.")
             .WithSummary("Delete a role")
             .Produces(StatusCodes.Status204NoContent)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .RequireAuthorization();
+
+        // Assign Roles to User
+        group.MapPost("/{roleId}/users",
+            [ApiAuthorize(Permission.Role.Users)] async (Guid roleId, List<Guid> userIds, ISender mediator) =>
+            {
+                var command = new AssignRoleUsersCommand(roleId, userIds);
+                var result = await mediator.Send(command);
+                return result.ToTypedResult();
+            })
+            .WithName("AssignUsersToRole")
+            .WithDescription("Assigns one or more users to a role by their unique ID.")
+            .WithSummary("Assign roles to a user")
+            .Produces(StatusCodes.Status204NoContent)
+            .ProducesValidationProblem()
             .ProducesProblem(StatusCodes.Status404NotFound)
             .RequireAuthorization();
     }

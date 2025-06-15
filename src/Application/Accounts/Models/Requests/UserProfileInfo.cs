@@ -2,7 +2,7 @@
 using RuanFa.FashionShop.Domain.Commons.Enums;
 using RuanFa.FashionShop.Domain.Commons.ValueObjects;
 
-namespace RuanFa.FashionShop.Application.Accounts.Models.Datas;
+namespace RuanFa.FashionShop.Application.Accounts.Models.Requests;
 public record UserProfileInfo
 {
     public string? Username { get; set; }

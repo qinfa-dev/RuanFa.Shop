@@ -1,4 +1,4 @@
-﻿using RuanFa.FashionShop.Application.Accounts.Models.Datas;
+﻿using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 
 namespace RuanFa.FashionShop.Application.Accounts.Models.Responses;
 public record RoleDetailResult : RoleInfo

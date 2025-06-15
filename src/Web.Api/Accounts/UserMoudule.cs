@@ -5,7 +5,6 @@ using RuanFa.FashionShop.Application.Abstractions.Models.Options;
 using RuanFa.FashionShop.Application.Abstractions.Models.Pagings;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authorization.Attributes;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authorization.Permissions;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
 using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Application.Accounts.Users.Assign;
@@ -114,9 +113,9 @@ public class UsersModule : ICarterModule
 
         // Assign Roles to User
         group.MapPost("/{userId}/roles",
-            [ApiAuthorize(Permission.Role.Users)] async (Guid userId, List<Guid> roles, ISender mediator) =>
+            [ApiAuthorize(Permission.Role.Users)] async (Guid userId, List<Guid> roleIds, ISender mediator) =>
             {
-                var command = new AssignUserRolesCommand(userId, roles);
+                var command = new AssignUserRolesCommand(userId, roleIds);
                 var result = await mediator.Send(command);
                 return result.ToTypedResult();
             })

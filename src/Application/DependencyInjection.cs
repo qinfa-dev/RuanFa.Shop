@@ -4,6 +4,7 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using RuanFa.FashionShop.Application.Abstractions.Behaviors;
+using RuanFa.FashionShop.Application.Abstractions.Loggings.Services;
 using Serilog;
 
 namespace RuanFa.FashionShop.Application;
@@ -21,6 +22,7 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
         });
 
+        services.AddScoped<IActivityLogCleanupService, ActivityLogCleanupService>();
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);
         services.AddMappings();
 

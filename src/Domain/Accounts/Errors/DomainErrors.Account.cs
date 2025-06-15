@@ -571,6 +571,10 @@ public static partial class DomainErrors
             public static Error InvalidAssignedRoles => Error.Validation(
                 code: "Role.InvalidAssignedRoles",
                 description: "Assign roles list cannot be null or contain invalid entries.");
+
+            public static Error InvalidAssignedUsers=> Error.Validation(
+                code: "Role.InvalidAssignedUsers",
+                description: "Assign users list cannot be null or contain invalid entries.");
         }
 
         public static class Business

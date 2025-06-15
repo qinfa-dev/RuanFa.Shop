@@ -1,7 +1,6 @@
 ﻿using ErrorOr;
 using RuanFa.FashionShop.Application.Abstractions.Models;
 using RuanFa.FashionShop.Application.Abstractions.Models.Pagings;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
 using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 

@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
+using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 
 namespace RuanFa.FashionShop.Application.Accounts.Services;
@@ -83,6 +83,15 @@ public interface IRoleManagementService
     /// <param name="cancellationToken">A cancellation token.</param>
     /// <returns>A <see cref="Success"/> indicator if the operation was successful. Wrapped in <see cref="ErrorOr{T}"/>.</returns>
     Task<ErrorOr<Updated>> AssignRolesToUserAsync(Guid userId, List<Guid> roleIds, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Assigns a single role to a user.
+    /// </summary>
+    /// <param name="roleId">The ID of the role to assign.</param>
+    /// <param name="userIds">>A list of user IDs to assign.</param>
+    /// <param name="cancellationToken">A cancellation token.</param>
+    /// <returns>A <see cref="Success"/> indicator if the operation was successful. Wrapped in <see cref="ErrorOr{T}"/>.</returns>
+    Task<ErrorOr<Updated>> AssignUsersToRoleAsync(Guid roleId, List<Guid> userIds,  CancellationToken cancellationToken = default);
 
 
     /// <summary>

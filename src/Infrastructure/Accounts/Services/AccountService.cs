@@ -21,7 +21,6 @@ using RuanFa.FashionShop.Application.Abstractions.Security.Authentication.Contex
 using RuanFa.FashionShop.Application.Abstractions.Security.Authentication.Enums;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authentication.Tokens;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authorization.Roles;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
 using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Application.Accounts.Services;

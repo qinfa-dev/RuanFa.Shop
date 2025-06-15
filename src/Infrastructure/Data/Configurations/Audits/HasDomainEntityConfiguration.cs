@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Domain;
 
-namespace RuanFa.FashionShop.Infrastructure.Data.Configurations.Aduits;
+namespace RuanFa.FashionShop.Infrastructure.Data.Configurations.Audits;
 internal class HasDomainEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : class, IHasDomainEvent
 {

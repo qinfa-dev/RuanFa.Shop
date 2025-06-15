@@ -1,10 +1,12 @@
 ﻿using ErrorOr;
+using RuanFa.FashionShop.Application.Abstractions.Loggings.Attributes;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Messaging.Queries;
 
 namespace RuanFa.FashionShop.Application.Accounts.Authentication.Login;
 
+[LogActivity]
 public record LoginWithPasswordQuery(string Credential, string Password) : IQuery<TokenResult>;
 internal sealed class LoginWithPasswordQueryHandler(IAccountService accountService)
     : IQueryHandler<LoginWithPasswordQuery, TokenResult>

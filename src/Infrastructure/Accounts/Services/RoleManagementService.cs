@@ -3,7 +3,7 @@ using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RuanFa.FashionShop.Application.Abstractions.Security.Authentication.Claims;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
+using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.Infrastructure.Accounts.Entities;
@@ -136,7 +136,44 @@ internal class RoleManagementService : IRoleManagementService
             return InfrastructureErrors.Role.AssignRolesInternal;
         }
     }
+    public async Task<ErrorOr<Updated>> AssignUsersToRoleAsync(Guid roleId, List<Guid> userIds, CancellationToken cancellationToken = default)
+    {
+        try
+        {
 
+            // Check: Retrieve role
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            if (role == null || string.IsNullOrEmpty(role.Name))
+                return InfrastructureErrors.Role.NotFound;
+
+            foreach (var userId in userIds)
+            {
+                // Check: Retrieve user
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user == null)
+                    return InfrastructureErrors.Account.NotFound;
+
+                // Check: If user is already in role, skip
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                    continue;
+
+                // Assign: Add user to role
+                var addResult = await _userManager.AddToRoleAsync(user, role.Name);
+                if (!addResult.Succeeded)
+                    return addResult.Errors.ToApplicationResult("AssignUserToRoleFailed");
+            }
+
+            // Log: Users assigned to role
+            Log.Information("Assigned users {UserIds} to role {RoleId}", userIds, roleId);
+            return Result.Updated;
+        }
+        catch (Exception ex)
+        {
+            // Log: Assignment error
+            Log.Error(ex, "Failed to assign users {UserIds} to role {RoleId}", userIds, roleId);
+            return InfrastructureErrors.Role.AssignUsersInternal;
+        }
+    }
     public async Task<ErrorOr<RoleResult>> CreateRoleAsync(RoleInfo role, CancellationToken cancellationToken = default)
     {
         try

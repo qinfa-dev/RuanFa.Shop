@@ -2,14 +2,14 @@
 
 namespace RuanFa.FashionShop.SharedKernel.Domains.Entities;
 
-public abstract class AuditableEnitity<TId> : Entity<TId>, IAuditable where TId : notnull
+public abstract class AuditableEntity<TId> : Entity<TId>, IAuditable where TId : notnull
 {
     #region Constructors
-    protected AuditableEnitity()
+    protected AuditableEntity()
     {
     }
 
-    protected AuditableEnitity(TId id) : base(id)
+    protected AuditableEntity(TId id) : base(id)
     {
         Id = id;
     }

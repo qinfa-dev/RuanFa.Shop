@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Text;
 using Ardalis.GuardClauses;
+using Coravel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,7 @@ using RuanFa.FashionShop.Application.Abstractions.Storage;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.Infrastructure.Accounts.Entities;
 using RuanFa.FashionShop.Infrastructure.Accounts.Services;
+using RuanFa.FashionShop.Infrastructure.BackgroundJobs;
 using RuanFa.FashionShop.Infrastructure.Data;
 using RuanFa.FashionShop.Infrastructure.Data.Interceptors;
 using RuanFa.FashionShop.Infrastructure.Data.Seeds;
@@ -47,8 +49,19 @@ public static class DependencyInjection
             .AddIdentityServices()
             .AddAuthenticationInternal(configuration)
             .AddHttpClientWithClientId()
+            .AddBackgroundJobs()
             .AddSeeders();
 
+        return services;
+    }
+    public static IServiceCollection AddBackgroundJobs(this IServiceCollection services)
+    {
+        // Register the job itself
+        services.AddScoped<DeleteOldActivityLogsJob>();
+        services.AddScoped<TodoReminderJob>();
+        services.AddScheduler();
+
+        Log.Information("Init infrastructure layer: BackgroundJobs setup complete");
         return services;
     }
 
@@ -59,9 +72,12 @@ public static class DependencyInjection
         services.Configure<EmailSettings>(configuration.GetSection(EmailSettings.Section));
         services.Configure<SmsSettings>(configuration.GetSection(SmsSettings.Section));
         services.Configure<StorageSettings>(configuration.GetSection(StorageSettings.Section));
+        services.Configure<BackgroundJobsSettings>(configuration.GetSection(BackgroundJobsSettings.Section));
 
         var emailSettings = configuration.GetSection(EmailSettings.Section).Get<EmailSettings>();
+
         Guard.Against.Null(emailSettings, message: "EmailSettings not found in configuration.");
+
         if (emailSettings.EnableEmailNotifications)
         {
             services.AddFluentEmail(emailSettings.FromEmail)

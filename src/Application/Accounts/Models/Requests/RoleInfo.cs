@@ -1,4 +1,4 @@
-﻿namespace RuanFa.FashionShop.Application.Accounts.Models.Datas;
+﻿namespace RuanFa.FashionShop.Application.Accounts.Models.Requests;
 public record RoleInfo
 {
     public string Name { get; set; } = null!;

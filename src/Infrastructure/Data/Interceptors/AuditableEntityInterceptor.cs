@@ -31,7 +31,7 @@ internal sealed class AuditableEntityInterceptor(IUserContext userContext, IDate
             return;
 
         var now = dateTimeProvider.UtcNow;
-        var userString = userContext.UserId != null ? "System" : userContext.Username;
+        var userString = userContext.UserId == null ? "System" : userContext.Username;
 
         foreach (var entry in context.ChangeTracker.Entries<IAuditable>())
         {

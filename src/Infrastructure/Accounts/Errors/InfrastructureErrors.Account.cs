@@ -335,6 +335,13 @@ public static partial class InfrastructureErrors
             description: "An unexpected error occurred while assigning roles to the user.");
 
         /// <summary>
+        /// Gets an error indicating an internal failure during multiple role assignments to a user.
+        /// </summary>
+        public static Error AssignUsersInternal => Error.Failure(
+            code: "Role.AssignUsersInternal",
+            description: "An unexpected error occurred while assigning user to the role.");
+
+        /// <summary>
         /// Gets an error indicating an internal failure during role removal from a user.
         /// </summary>
         public static Error RemoveRoleInternal => Error.Failure(

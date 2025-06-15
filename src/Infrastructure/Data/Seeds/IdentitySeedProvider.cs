@@ -67,8 +67,8 @@ public class IdentitySeedProvider : IDataSeeder
 
         var rolePermissions = new Dictionary<string, List<string>>
         {
-            { DefaultRoles.Administrator, Permission.AdministratorMoudle },
-            { DefaultRoles.User, Permission.UserMoudle }
+            { DefaultRoles.Administrator, Permission.AdministratorModule },
+            { DefaultRoles.User, Permission.UserModule }
         };
 
         var tasks = rolePermissions.Select(async kvp =>
@@ -155,10 +155,10 @@ public class IdentitySeedProvider : IDataSeeder
 
         var users = new[]
         {
-            ("admin1@quingfa.com", "Admin1Password!", "Admin One", "1234567890", GenderType.Male, new DateTime(1990, 1, 1), DefaultRoles.Administrator),
-            ("admin2@quingfa.com", "Admin2Password!", "Admin Two", "1234567891", GenderType.Male, new DateTime(1990, 2, 2), DefaultRoles.Administrator),
-            ("user1@quingfa.com", "User1Password!", "User One", "0987654321", GenderType.Female, new DateTime(1995, 5, 5), DefaultRoles.User),
-            ("user2@quingfa.com", "User2Password!", "User Two", "0987654322", GenderType.Female, new DateTime(1995, 6, 6), DefaultRoles.User)
+            ("root@ruanfa.com", "Root@123456", "Admin One", "1234567890", GenderType.Male, new DateTime(1990, 1, 1), DefaultRoles.Administrator),
+            ("admin2@ruanfa.com", "Admin2Password!", "Admin Two", "1234567891", GenderType.Male, new DateTime(1990, 2, 2), DefaultRoles.Administrator),
+            ("user1@ruanfa.com", "User1Password!", "User One", "0987654321", GenderType.Female, new DateTime(1995, 5, 5), DefaultRoles.User),
+            ("user2@ruanfa.com", "User2Password!", "User Two", "0987654322", GenderType.Female, new DateTime(1995, 6, 6), DefaultRoles.User)
         };
 
         var tasks = users.Select(async user =>
