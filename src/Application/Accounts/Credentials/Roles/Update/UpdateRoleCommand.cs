@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using RuanFa.FashionShop.Application.Accounts.Models.Datas;
+using RuanFa.FashionShop.Application.Accounts.Models.Requests;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Messaging.Commands;
 

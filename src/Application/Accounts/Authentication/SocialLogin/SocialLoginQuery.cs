@@ -1,9 +1,12 @@
 ﻿using ErrorOr;
+using RuanFa.FashionShop.Application.Abstractions.Loggings.Attributes;
 using RuanFa.FashionShop.Application.Accounts.Models.Responses;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Messaging.Queries;
 
 namespace RuanFa.FashionShop.Application.Accounts.Authentication.SocialLogin;
+
+[LogActivity]
 public record SocialLoginQuery : IQuery<TokenResult>
 {
     public string Provider { get; set; } = null!;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RuanFa.FashionShop.Application.Abstractions.Data;
+using RuanFa.FashionShop.Application.Abstractions.Loggings.Entities;
 using RuanFa.FashionShop.Domain.Accounts.Entities;
 using RuanFa.FashionShop.Domain.Todos.AggregateRoot;
 using RuanFa.FashionShop.Domain.Todos.Entities;
@@ -18,6 +19,8 @@ internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> optio
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.ApplyUtcDateTimeConverter();
     }
+    // Audits
+    public DbSet<ActivityLogEntry> ActivityLogs => Set<ActivityLogEntry>();
 
     // Profiles
     public DbSet<UserProfile> Profiles => Set<UserProfile>();

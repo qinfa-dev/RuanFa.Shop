@@ -1,9 +1,11 @@
 ﻿using ErrorOr;
+using RuanFa.FashionShop.Application.Abstractions.Loggings.Attributes;
 using RuanFa.FashionShop.Application.Accounts.Services;
 using RuanFa.FashionShop.SharedKernel.Interfaces.Messaging.Commands;
 
 namespace RuanFa.FashionShop.Application.Accounts.Users.Assign;
 
+[LogActivity]
 public sealed record AssignUserRolesCommand(Guid UserId, List<Guid> RoleIds) : ICommand<Updated>;
 
 internal sealed class AssignUserRolesCommandHandler(IRoleManagementService roleManagementService)
